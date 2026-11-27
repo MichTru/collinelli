@@ -59,9 +59,10 @@ const ICON = {
 if (document.documentElement.classList.contains("intro")) {
   const end = () => { document.documentElement.classList.remove("intro"); try { sessionStorage.setItem("intro", "1"); } catch (e) {} };
   const ov = document.querySelector(".intro-ov");
-  ov.addEventListener("animationend", e => { if (e.animationName === "ov-out") end(); });
+  ov.addEventListener("animationend", e => { if (e.animationName === "c-zoom") end(); });
+  addEventListener("keydown", end, { once: true });
   ov.addEventListener("click", end);
-  setTimeout(end, 3000);
+  setTimeout(end, 3483);
 }
 
 /* ---------- testata e piede comuni ---------- */

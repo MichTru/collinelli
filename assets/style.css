@@ -376,13 +376,14 @@ body[data-page=home] .hero .wrap{padding-block:0 clamp(40px,8vh,88px)}
 @media(max-width:700px){body[data-page=home] .hero .wrap{padding-bottom:110px}}
 .pause{bottom:clamp(40px,8vh,88px)}
 @media(max-width:700px){.pause{bottom:110px}}
-/* intro all'apertura: il logo si scrive, sale il giallo, si apre il sito (una volta per visita) */
+/* intro all'apertura (una volta per visita)
+   la C del monogramma si scrive a mano tratto dopo tratto, poi la camera "vola" dentro l'occhiello basso della C e si apre il sito */
 .intro-ov{display:none}
 html.intro body{overflow:hidden}
-html.intro .intro-ov{display:grid;place-items:center;position:fixed;inset:0;z-index:300;background:#111112;cursor:pointer;animation:ov-out .6s cubic-bezier(.7,0,.25,1) 1.7s forwards}
-html.intro .intro-ov img{width:min(72vw,560px);height:auto;clip-path:inset(-10% 100% -10% 0);animation:ov-write 1.05s cubic-bezier(.55,0,.3,1) .2s forwards}
-html.intro .intro-ov::after{content:"";position:absolute;inset:0;background:var(--acc);transform:translateY(100%);animation:ov-rise .45s cubic-bezier(.7,0,.25,1) 1.3s forwards}
-html.intro .hero video{animation-delay:1.9s}
-@keyframes ov-write{to{clip-path:inset(-10% -2% -10% 0)}}
-@keyframes ov-rise{to{transform:none}}
-@keyframes ov-out{to{transform:translateY(-100%)}}
+html.intro .intro-ov{display:grid;place-items:center;position:fixed;inset:0;z-index:300;background:#111112;cursor:pointer;animation:ov-clear .75s cubic-bezier(.6,0,.2,1) 2163ms forwards}
+.intro-c{width:clamp(170px,30vw,330px);height:auto;overflow:visible;transform-origin:53.6% 70.4%;animation:c-zoom 1s cubic-bezier(.8,0,.15,1) 1983ms forwards}
+.intro-c path{fill:none;stroke:#fff;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:var(--l);stroke-dashoffset:var(--l);animation:c-draw var(--t) var(--e) var(--d) forwards}
+html.intro .hero video{animation:settle 1.6s cubic-bezier(.2,.7,.2,1) 2233ms both}
+@keyframes c-draw{to{stroke-dashoffset:0}}
+@keyframes c-zoom{60%{opacity:1}to{transform:scale(22);opacity:0}}
+@keyframes ov-clear{to{background-color:rgb(17 17 18 / 0)}}
