@@ -387,3 +387,8 @@ html.intro .hero video{animation:settle 1.6s cubic-bezier(.2,.7,.2,1) 2233ms bot
 @keyframes c-draw{to{stroke-dashoffset:0}}
 @keyframes c-zoom{60%{opacity:1}to{transform:scale(22);opacity:0}}
 @keyframes ov-clear{to{background-color:rgb(17 17 18 / 0)}}
+.hero video{object-position:60% 50%}
+@media(max-width:700px) and (orientation:portrait){.hero video{object-position:54% 50%}}
+.photo-band{margin:8px clamp(6px,1.4vw,20px);border-radius:var(--r-l);overflow:hidden;aspect-ratio:21/8;background:var(--raised)}
+.photo-band img{width:100%;height:100%;object-fit:cover;object-position:60% 55%}
+@media(max-width:700px){.photo-band{aspect-ratio:4/3}}
