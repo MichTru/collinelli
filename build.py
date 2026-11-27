@@ -113,13 +113,13 @@ PAGES = {
   </div>
 </div></section>
 
-<section class="band sunk" id="servizi"><div class="wrap split">
-  <div>
-    <h2>Officina per tutte le marche.</h2>
-    <p class="muted" style="margin-top:14px">In Via Celletta 8/E. Preventivi chiari concordati prima del lavoro, manutenzioni spesso pronte in giornata e auto sostitutiva quando serve.</p>
-    <p style="margin-top:22px;display:flex;gap:10px;flex-wrap:wrap"><a class="btn acc" href="officina.html#prenota">Prenota in officina</a><a class="btn" href="tel:+39054562254">0545 62254</a></p>
+<section class="band sunk" id="servizi"><div class="wrap">
+  <div class="svc-head">
+    <div><h2>Officina per tutte le marche.</h2>
+    <p class="muted">In Via Celletta 8/E. Preventivi chiari concordati prima del lavoro, manutenzioni spesso pronte in giornata e auto sostitutiva quando serve.</p></div>
+    <div class="acts"><a class="btn" href="tel:+39054562254">Chiama l'officina 0545 62254</a></div>
   </div>
-  <ul class="list">{servizi_html}</ul>
+  <ul class="svc">{servizi_html}<li class="cta"><a href="officina.html#prenota"><b>Prenota un intervento</b><span>Scegli il lavoro e il giorno, ti richiamiamo per confermare.</span></a></li></ul>
 </div></section>
 
 <section class="band" id="marchi"><div class="wrap">
@@ -270,7 +270,7 @@ PAGES = {
 # True finché il sito è un'anteprima (GitHub Pages): evita che Google lo indicizzi come doppione
 ANTEPRIMA = True
 SITO = "https://www.collinelliauto.it/"
-VERSION = "202611271452"  # cambia a ogni pubblicazione per forzare l'aggiornamento nei browser
+VERSION = "202611271458"  # cambia a ogni pubblicazione per forzare l'aggiornamento nei browser
 for name, p in PAGES.items():
     p.setdefault("v", VERSION)
     p["robots"] = '<meta name="robots" content="noindex">' if ANTEPRIMA or name == "privacy" else f'<link rel="canonical" href="{SITO}{"" if name == "index" else name + ".html"}">' 
