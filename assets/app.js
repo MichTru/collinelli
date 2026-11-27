@@ -128,15 +128,6 @@ function marquee(cars) {
     const attrs = hidden ? ' tabindex="-1"' : "";
     return stock.has(b) ? `<a href="auto.html?marca=${encodeURIComponent(b)}"${attrs}>${inner}</a>` : `<div>${inner}</div>`;
   };
-  const btn = $("#mq-btn");
-  if (btn) {
-    btn.innerHTML = ICON.pause;
-    btn.onclick = () => {
-      const p = el.classList.toggle("paused");
-      btn.innerHTML = p ? ICON.play : ICON.pause;
-      btn.setAttribute("aria-label", p ? "Fai scorrere i marchi" : "Ferma lo scorrimento dei marchi");
-    };
-  }
   el.innerHTML = `<div class="track">${MARCHI.map(b => item(b)).join("")}<div class="dup" aria-hidden="true">${MARCHI.map(b => item(b, true)).join("")}</div></div>`;
 }
 

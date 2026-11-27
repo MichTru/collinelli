@@ -123,7 +123,7 @@ PAGES = {
 </div></section>
 
 <section class="band" id="marchi"><div class="wrap">
-  <div class="head mq-head"><h2>I marchi che trattiamo</h2><button class="mq-btn" id="mq-btn" type="button" aria-label="Ferma lo scorrimento dei marchi"></button></div>
+  <div class="head"><h2>I marchi che trattiamo</h2></div>
 </div>
 <div class="marquee" id="marquee"></div>
 </section>
@@ -226,7 +226,7 @@ PAGES = {
 </div></section>
 
 <section class="band"><div class="wrap">
-  <div class="head mq-head"><h2>I marchi che trattiamo</h2><button class="mq-btn" id="mq-btn" type="button" aria-label="Ferma lo scorrimento dei marchi"></button></div>
+  <div class="head"><h2>I marchi che trattiamo</h2></div>
 </div>
 <div class="marquee" id="marquee"></div>
 <div class="wrap" style="margin-top:36px;display:flex;gap:10px;flex-wrap:wrap"><a class="btn acc" href="auto.html">Guarda le auto in vendita</a><a class="btn" href="contatti.html">Passa a trovarci</a></div>
@@ -270,7 +270,7 @@ PAGES = {
 # True finché il sito è un'anteprima (GitHub Pages): evita che Google lo indicizzi come doppione
 ANTEPRIMA = True
 SITO = "https://www.collinelliauto.it/"
-VERSION = "202611271450"  # cambia a ogni pubblicazione per forzare l'aggiornamento nei browser
+VERSION = "202611271452"  # cambia a ogni pubblicazione per forzare l'aggiornamento nei browser
 for name, p in PAGES.items():
     p.setdefault("v", VERSION)
     p["robots"] = '<meta name="robots" content="noindex">' if ANTEPRIMA or name == "privacy" else f'<link rel="canonical" href="{SITO}{"" if name == "index" else name + ".html"}">' 
