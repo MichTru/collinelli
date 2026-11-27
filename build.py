@@ -202,7 +202,7 @@ PAGES = {
   <p class="lead-text">Siamo un'azienda piccola per scelta: due sedi a Bagnacavallo, cinque persone e clienti che tornano da noi per la prossima auto e per il tagliando.</p>
 </div></section>
 
-<figure class="photo-band" style="margin-block:8px"><img src="assets/img/sede-showroom.jpg" alt="Lo showroom Collinelli Auto in Via Chiusa 53/F a Bagnacavallo, visto dall'alto" width="1600" height="899" loading="lazy"></figure>
+<figure class="photo-band" style="margin-block:8px"><img src="assets/img/sede-showroom.jpg" alt="Lo showroom Collinelli Auto in Via Chiusa 53/F a Bagnacavallo, visto dall'alto" width="1672" height="941" loading="lazy"></figure>
 
 <section class="band"><div class="wrap split">
   <div class="sticky-col">
@@ -286,7 +286,7 @@ PAGES = {
 ANTEPRIMA = True
 SITO = "https://www.collinelliauto.it/"
 ANTEPRIMA_URL = "https://michtru.github.io/collinelli/"
-VERSION = "202611271545"  # cambia a ogni pubblicazione per forzare l'aggiornamento nei browser
+VERSION = "202611271550"  # cambia a ogni pubblicazione per forzare l'aggiornamento nei browser
 for name, p in PAGES.items():
     p.setdefault("v", VERSION)
     p["preload"] = '<link rel="preload" as="image" href="assets/img/sede-showroom.jpg">\n' if name == "index" else ""
