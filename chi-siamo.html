@@ -12,7 +12,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Figtree:ital,wght@0,400..900;1,700..900&display=swap">
-<link rel="stylesheet" href="assets/style.css?v=202611271430">
+<link rel="stylesheet" href="assets/style.css?v=202611271445">
 <link rel="icon" href="assets/img/favicon.png" type="image/png">
 <link rel="apple-touch-icon" href="assets/img/apple-touch-icon.png">
 <meta property="og:image" content="assets/img/og.jpg">
@@ -22,33 +22,57 @@
 <div id="top"></div>
 <main id="main">
 
-<div class="wrap pagehead"><h1>Una famiglia di meccanici che vende auto.</h1><p class="muted">Siamo un'azienda piccola di proposito: cinque persone, due sedi a Bagnacavallo, clienti che tornano.</p></div>
-<section class="band"><div class="wrap">
-  <div class="years">
-    <div><b>1973</b><p>Gilberto Collinelli apre la sua officina come artigiano autoriparatore.</p></div>
-    <div><b>Alfa Romeo</b><p>Per quasi trent'anni l'officina lavora a fianco del marchio, fino ai primi anni 2000.</p></div>
-    <div><b>1997</b><p>Entra in azienda il figlio Marco e nasce la vendita di auto usate in Via Chiusa 53/F.</p></div>
-    <div><b>Oggi</b><p>Vendita e officina insieme: le occasioni Collinelli sono controllate e garantite 12 mesi.</p></div>
+<section class="intro"><div class="wrap split" style="align-items:end">
+  <h1 class="big">Una famiglia di meccanici che vende auto.</h1>
+  <p class="lead-text">Siamo un'azienda piccola per scelta: due sedi a Bagnacavallo, cinque persone e clienti che tornano da noi per la prossima auto e per il tagliando.</p>
+</div></section>
+
+<section class="band"><div class="wrap split">
+  <div class="sticky-col">
+    <h2>Dal 1973 a oggi</h2>
+    <p class="muted" style="margin-top:14px;max-width:40ch">Prima l'officina, poi la vendita. È per questo che ogni auto che vendiamo passa dalle mani dei nostri meccanici.</p>
+  </div>
+  <ol class="timeline">
+    <li><b>1973</b><h3>Nasce l'officina</h3><p>Gilberto Collinelli, oggi presidente dell'azienda, apre la sua attività di artigiano autoriparatore.</p></li>
+    <li><b>Anni '70 – 2000</b><h3>Accanto ad Alfa Romeo</h3><p>Per quasi trent'anni l'officina lavora con il marchio Alfa Romeo, fino ai primi anni 2000.</p></li>
+    <li><b>1997</b><h3>Arriva Marco e nasce la vendita</h3><p>Il figlio Marco entra in azienda e apre lo showroom di usato in Via Chiusa 53/F, accanto all'officina di sempre.</p></li>
+    <li><b>Oggi</b><h3>Le occasioni Collinelli</h3><p>Auto scelte una per una, controllate in officina, garantite 12 mesi e consegnate con l'attestazione di conformità.</p></li>
+  </ol>
+</div></section>
+
+<section class="band yellow"><div class="wrap">
+  <h2 style="margin-bottom:clamp(24px,3vw,40px)">Come lavoriamo</h2>
+  <div class="values">
+    <div><h3>Rapporto diretto</h3><p>Parli con chi ha controllato l'auto, non con un call center.</p></div>
+    <div><h3>Prezzi chiari</h3><p>Storia del veicolo e costi spiegati prima della firma, senza sorprese.</p></div>
+    <div><h3>Dopo la vendita</h3><p>L'assistenza continua nella nostra officina, con uno sconto sulle manutenzioni.</p></div>
+    <div><h3>Auto su richiesta</h3><p>Con l'importazione parallela troviamo anche il modello che non abbiamo in piazzale.</p></div>
   </div>
 </div></section>
-<section class="band yellow"><div class="wrap split">
-  <h2 style="font-size:clamp(30px,4vw,48px)">Come lavoriamo</h2>
-  <ul class="list">
-    <li><b>Rapporto diretto</b><span>Parli con chi ha controllato l'auto, non con un call center.</span></li>
-    <li><b>Trasparenza</b><span>Prezzi chiari e storia del veicolo spiegata prima della firma.</span></li>
-    <li><b>Dopo la vendita</b><span>L'assistenza continua nella nostra officina, a pochi minuti dallo showroom.</span></li>
-    <li><b>Auto su richiesta</b><span>Con l'importazione parallela troviamo anche il modello che non abbiamo in piazzale.</span></li>
-  </ul>
-</div></section>
+
 <section class="band"><div class="wrap">
-  <div class="head"><h2>Le marche che trattiamo di più</h2></div>
-  <p class="muted" style="font-size:19px;max-width:62ch">Alfa Romeo, Audi, BMW, Fiat, Ford, Kia, Lancia, Mercedes-Benz, Mini, Opel, Peugeot, Renault, Volkswagen.</p>
-  <p style="margin-top:24px"><a class="btn acc" href="auto.html">Guarda le auto in vendita</a></p>
+  <div class="head"><h2>Due sedi, a pochi minuti l'una dall'altra</h2></div>
+  <div class="places" id="about-places"></div>
 </div></section>
+
+<section class="band sunk"><div class="wrap reviews">
+  <div class="score"><b>4,7</b><span class="stars" aria-hidden="true">★★★★★</span><p class="muted"><a href="https://www.autoscout24.it/concessionari/collinelli-auto-srl/recensioni" rel="noopener">44 recensioni su AutoScout24</a></p></div>
+  <div class="quotes">
+    <blockquote>Molto professionale, disponibile, cortese.<cite>Luca, cliente</cite></blockquote>
+    <blockquote>Venditore che raccomando, cordiale e simpatico.<cite>Cliente su AutoScout24</cite></blockquote>
+  </div>
+</div></section>
+
+<section class="band"><div class="wrap">
+  <div class="head"><h2>I marchi che trattiamo</h2></div>
+</div>
+<div class="marquee" id="marquee"></div>
+<div class="wrap" style="margin-top:36px;display:flex;gap:10px;flex-wrap:wrap"><a class="btn acc" href="auto.html">Guarda le auto in vendita</a><a class="btn" href="contatti.html">Passa a trovarci</a></div>
+</section>
 
 </main>
 <div id="foot"></div>
-<script src="data/auto.js?v=202611271430"></script>
-<script src="assets/app.js?v=202611271430"></script>
+<script src="data/auto.js?v=202611271445"></script>
+<script src="assets/app.js?v=202611271445"></script>
 </body>
 </html>

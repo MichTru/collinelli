@@ -5,8 +5,26 @@ const AZ = {
   showroom: { nome: "Showroom e vendita", via: "Via Chiusa 53/F", cap: "48012 Bagnacavallo (RA)", tel: "0545 934418", mail: "info@collinelliauto.com", maps: "https://www.google.com/maps/search/?api=1&query=Collinelli+Auto+Via+Chiusa+53+Bagnacavallo" },
   officina: { nome: "Officina e assistenza", via: "Via Celletta 8/E", cap: "48012 Bagnacavallo (RA)", tel: "0545 62254", mail: "assistenza@collinelliauto.com", maps: "https://www.google.com/maps/search/?api=1&query=Via+Celletta+8+Bagnacavallo" },
   facebook: "https://www.facebook.com/pages/Collinelli-Auto-Srl/609828095705340",
-  orari: [["Lunedì", "9:00–12:30 e 15:00–19:00"], ["Martedì", "9:00–12:30 e 15:00–19:00"], ["Mercoledì", "9:00–12:30 e 15:00–19:00"], ["Giovedì", "9:00–12:30 e 15:00–19:00"], ["Venerdì", "9:00–12:30 e 15:00–19:00"], ["Sabato", "9:00–12:30 e 15:00–18:00"], ["Domenica", "Chiuso"]]
+  // orari showroom (fonte: AutoScout24), lunedì = 0
+  orari: [
+    ["Lunedì", [["9:00", "12:30"], ["15:00", "19:00"]]], ["Martedì", [["9:00", "12:30"], ["15:00", "19:00"]]],
+    ["Mercoledì", [["9:00", "12:30"], ["15:00", "19:00"]]], ["Giovedì", [["9:00", "12:30"], ["15:00", "19:00"]]],
+    ["Venerdì", [["9:00", "12:30"], ["15:00", "19:00"]]], ["Sabato", [["9:00", "12:30"], ["15:00", "18:00"]]], ["Domenica", []]
+  ]
 };
+const MARCHI = ["Alfa Romeo", "Audi", "BMW", "DR", "Fiat", "Ford", "Kia", "Lancia", "Mercedes-Benz", "Mini", "Opel", "Peugeot", "Renault", "Volkswagen"];
+const slug = s => s.toLowerCase().normalize("NFD").replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, "");
+const mins = t => { const [h, m] = t.split(":"); return h * 60 + +m; };
+const dayIdx = () => (new Date().getDay() + 6) % 7;
+function openStatus() {
+  const now = new Date(), d = dayIdx(), m = now.getHours() * 60 + now.getMinutes();
+  for (const [a, z] of AZ.orari[d][1]) if (m >= mins(a) && m < mins(z)) return { open: true, text: `Showroom aperto ora, chiude alle ${z}` };
+  for (const [a] of AZ.orari[d][1]) if (m < mins(a)) return { open: false, text: `Showroom chiuso ora, riapre oggi alle ${a}` };
+  for (let i = 1; i <= 7; i++) {
+    const n = (d + i) % 7, s = AZ.orari[n][1];
+    if (s.length) return { open: false, text: `Showroom chiuso ora, riapre ${i === 1 ? "domani" : AZ.orari[n][0].toLowerCase()} alle ${s[0][0]}` };
+  }
+}
 const telHref = t => "tel:+39" + t.replace(/\s/g, "");
 
 /* ---------- sorgente dati: oggi il file data/auto.js, domani il database del pannello ---------- */
@@ -86,9 +104,21 @@ const card = c => `
 </a>`;
 
 const hoursTable = () => {
-  const d = (new Date().getDay() + 6) % 7;
-  return `<table class="hours"><tbody>${AZ.orari.map(([g, h], i) => `<tr${i === d ? ' class="today"' : ""}><td>${g}</td><td>${h}</td></tr>`).join("")}</tbody></table>`;
+  const d = dayIdx();
+  return `<table class="hours"><tbody>${AZ.orari.map(([g, f], i) => `<tr${i === d ? ' class="today"' : ""}><td>${g}${i === d ? " <span>oggi</span>" : ""}</td><td>${f.length ? f.map(([a, z]) => `${a}–${z}`).join(", ") : "Chiuso"}</td></tr>`).join("")}</tbody></table>`;
 };
+
+/* nastro dei marchi: logo in assets/img/marchi/<nome>.svg, se manca si vede il nome */
+function marquee(cars) {
+  const el = $("#marquee"); if (!el) return;
+  const stock = new Set(cars.map(c => c.marca));
+  const item = (b, hidden) => {
+    const inner = `<img src="assets/img/marchi/${slug(b)}.svg" alt="" onload="this.classList.add('ok');this.nextElementSibling.remove()"><span>${esc(b)}</span>`;
+    const attrs = hidden ? ' tabindex="-1"' : "";
+    return stock.has(b) ? `<a href="auto.html?marca=${encodeURIComponent(b)}"${attrs}>${inner}</a>` : `<div>${inner}</div>`;
+  };
+  el.innerHTML = `<div class="track">${MARCHI.map(b => item(b)).join("")}<div class="dup" aria-hidden="true">${MARCHI.map(b => item(b, true)).join("")}</div></div>`;
+}
 
 const placeCard = (s, extra = "") => `
 <div class="place">
@@ -112,7 +142,8 @@ function contactForm({ to, subject, intro = "", fields = "", body = "" }) {
       const d = Object.fromEntries(new FormData(f));
       if (!d.tel && !d.email) { f.querySelector("[name=tel]").focus(); f.querySelector(".err").hidden = false; return; }
       const lines = Object.entries(d).filter(([, v]) => v).map(([k, v]) => `${k[0].toUpperCase() + k.slice(1)}: ${v}`);
-      location.href = `mailto:${to}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(lines.join("\n"))}`;
+      const dest = d.argomento === "Officina" ? AZ.officina.mail : to;
+      location.href = `mailto:${dest}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(lines.join("\n"))}`;
       f.querySelector(".sent").hidden = false;
     });
   });
@@ -151,9 +182,7 @@ const RENDER = {
     $("#s-marca").innerHTML = opt("marca", "Tutte le marche");
     $("#s-carrozzeria").innerHTML = opt("carrozzeria", "Tutte le carrozzerie");
     $("#recent").innerHTML = recent.slice(0, 8).map(card).join("");
-    const inStock = new Set(cars.map(c => c.marca));
-    const ALL = ["Alfa Romeo", "Audi", "BMW", "DR", "Fiat", "Ford", "Kia", "Lancia", "Mercedes-Benz", "Mini", "Opel", "Peugeot", "Renault", "Volkswagen"];
-    $("#brands").innerHTML = ALL.map(b => inStock.has(b) ? `<a href="auto.html?marca=${encodeURIComponent(b)}">${esc(b)}</a>` : `<span>${esc(b)}</span>`).join("");
+    marquee(cars);
   },
 
   async auto() {
@@ -298,13 +327,41 @@ const RENDER = {
     $("#place-officina").innerHTML = placeCard(AZ.officina);
   },
 
-  "chi-siamo"() {},
+  async "chi-siamo"() {
+    $("#about-places").innerHTML = placeCard(AZ.showroom, `<p class="note">Vendita, permute e finanziamenti.</p>`) + placeCard(AZ.officina, `<p class="note">Tagliandi, riparazioni e revisioni per tutte le marche.</p>`);
+    marquee(await getCars());
+  },
 
   contatti() {
-    $("#places").innerHTML = placeCard(AZ.showroom, `<h3 style="margin-top:8px;font-size:17px">Orari</h3>${hoursTable()}`) + placeCard(AZ.officina, `<p class="note">Per gli orari dell'officina chiama il ${AZ.officina.tel}.</p>`);
+    const st = openStatus();
+    $("#status").className = "status " + (st.open ? "on" : "off");
+    $("#status").textContent = st.text;
+    $("#quick").innerHTML = [
+      [telHref(AZ.showroom.tel), ICON.phone, "Chiama lo showroom", AZ.showroom.tel],
+      [telHref(AZ.officina.tel), ICON.phone, "Chiama l'officina", AZ.officina.tel],
+      ["#scrivi", ICON.mail, "Scrivici", "Ti ricontattiamo noi"],
+      [AZ.showroom.maps, ICON.pin, "Indicazioni", "Via Chiusa 53/F"]
+    ].map(([h, i, t, s], k) => `<a href="${h}"${k === 3 ? ' rel="noopener"' : ""}${k === 0 ? ' class="main"' : ""}>${i}<b>${t}</b><span>${s}</span></a>`).join("");
+    const site = (s, q, extra) => `
+      <article class="site">
+        <iframe class="map" title="Mappa: ${s.nome}" loading="lazy" referrerpolicy="no-referrer-when-downgrade" src="https://maps.google.com/maps?q=${q}&z=15&output=embed"></iframe>
+        <div class="site-bd">
+          <h2>${s.nome}</h2>
+          <address>${s.via}, ${s.cap}</address>
+          <dl>
+            <div><dt>Telefono</dt><dd><a href="${telHref(s.tel)}">${s.tel}</a></dd></div>
+            <div><dt>Email</dt><dd><a href="mailto:${s.mail}">${s.mail}</a></dd></div>
+          </dl>
+          ${extra}
+          <a class="btn" href="${s.maps}" rel="noopener">${ICON.pin}Apri in Google Maps</a>
+        </div>
+      </article>`;
+    $("#sites").innerHTML = site(AZ.showroom, "44.411867,11.979302", `<h3>Orari</h3>${hoursTable()}`) +
+      site(AZ.officina, encodeURIComponent("Via Celletta 8, 48012 Bagnacavallo"), `<h3>Orari</h3><p class="muted">Per orari e appuntamenti chiama il ${AZ.officina.tel}.</p><h3>Servizi</h3><ul class="tags">${["Tagliandi", "Riparazioni", "Diagnosi elettronica", "Climatizzatori", "Cambi automatici", "Revisioni", "Auto sostitutiva"].map(s => `<li>${s}</li>`).join("")}</ul><a class="btn acc" href="officina.html#prenota">Prenota in officina</a>`);
+    const topics = ["Acquisto di un'auto", "Permuta", "Finanziamento", "Ricerca di un modello", "Officina", "Altro"];
     $("#form-contatti").innerHTML = contactForm({
       to: AZ.showroom.mail, subject: "Richiesta dal sito",
-      fields: `<label class="f">Argomento<select name="argomento"><option>Acquisto di un'auto</option><option>Ricerca di un modello</option><option>Valutazione della mia auto in permuta</option><option>Finanziamento</option><option>Altro</option></select></label>`
+      fields: `<fieldset class="topics"><legend>Di cosa hai bisogno?</legend>${topics.map((t, i) => `<label><input type="radio" name="argomento" value="${t}"${i ? "" : " checked"}><span>${t}</span></label>`).join("")}</fieldset>`
     });
   }
 };
