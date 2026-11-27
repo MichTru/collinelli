@@ -12,7 +12,7 @@ Sito statico (HTML, CSS, JS senza framework) per Collinelli Auto S.r.l., Bagnaca
 - Testi delle pagine: `build.py`, poi `python3 build.py` rigenera gli HTML
 - Testata, piede, orari e contatti: `assets/app.js` (oggetto `AZ`)
 - Auto in vendita: `data/auto.js` (temporaneo, verrà sostituito dal pannello admin)
-- Video hero: mettere il file in `assets/video/hero-drone.mp4` (H.264, 1920x1080, max 8-10 MB, senza audio). Finché manca si vede la foto dell'ultima auto arrivata.
+- Video hero a tutto schermo: `assets/video/hero-drone.mp4` orizzontale (H.264, 1920x1080, 10-20 s in loop, senza audio, max 8-10 MB) e, consigliato, `assets/video/hero-drone-verticale.mp4` (1080x1920, max 6 MB) per i telefoni. Se manca la verticale, su telefono si usa l'orizzontale ritagliata al centro; se mancano entrambe si vede la foto dell'ultima auto arrivata.
 
 ## Messa online sul dominio vero
 In `build.py` impostare `ANTEPRIMA = False` (e `SITO` se il dominio cambia), poi `python3 build.py`:

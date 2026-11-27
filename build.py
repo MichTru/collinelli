@@ -59,9 +59,7 @@ PAGES = {
     desc="Auto usate selezionate e garantite 12 mesi, officina per tutte le marche. Collinelli Auto a Bagnacavallo (RA), tra Lugo e Ravenna, dal 1973.",
     page="home", extra=LD, body=f"""
 <section class="hero">
-  <video id="hero-video" muted loop playsinline preload="metadata" aria-hidden="true">
-    <source src="assets/video/hero-drone.mp4" type="video/mp4">
-  </video>
+  <video id="hero-video" muted loop playsinline preload="metadata" aria-hidden="true"></video>
   <button class="pause" id="vpause" type="button" aria-label="Metti in pausa il video" hidden></button>
   <div class="wrap">
     <h1>Auto usate garantite, dal 1973.</h1>
@@ -277,7 +275,7 @@ PAGES = {
 # True finché il sito è un'anteprima (GitHub Pages): evita che Google lo indicizzi come doppione
 ANTEPRIMA = True
 SITO = "https://www.collinelliauto.it/"
-VERSION = "202611271515"  # cambia a ogni pubblicazione per forzare l'aggiornamento nei browser
+VERSION = "202611271518"  # cambia a ogni pubblicazione per forzare l'aggiornamento nei browser
 for name, p in PAGES.items():
     p.setdefault("v", VERSION)
     p["robots"] = '<meta name="robots" content="noindex">' if ANTEPRIMA or name == "privacy" else f'<link rel="canonical" href="{SITO}{"" if name == "index" else name + ".html"}">' 

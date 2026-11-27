@@ -82,6 +82,12 @@ $("#foot").outerHTML = `
 </div></footer>
 <div class="dock"><a class="btn acc" href="${telHref(AZ.showroom.tel)}">${ICON.phone}Chiama</a><a class="btn" href="${AZ.showroom.maps}" rel="noopener">${ICON.pin}Indicazioni</a></div>`;
 
+if (page === "home") {
+  const top = $(".top"), hero = $(".hero");
+  const tint = () => top.classList.toggle("solid", scrollY > hero.offsetHeight - 90 || $("#nav").classList.contains("open"));
+  addEventListener("scroll", tint, { passive: true }); tint();
+  $("#burger").addEventListener("click", () => setTimeout(tint));
+}
 $("#burger").addEventListener("click", e => {
   const open = $("#nav").classList.toggle("open");
   e.currentTarget.setAttribute("aria-expanded", open);
@@ -187,6 +193,12 @@ const RENDER = {
     const lead = recent.find(c => c.evidenza) || recent[0];
     const v = $("#hero-video");
     v.poster = full(lead.foto[0]);
+    // su telefono in verticale prova prima la versione verticale del video
+    const files = ["assets/video/hero-drone.mp4"];
+    if (matchMedia("(max-width:700px) and (orientation:portrait)").matches) files.unshift("assets/video/hero-drone-verticale.mp4");
+    let fi = 0;
+    v.addEventListener("error", () => { if (++fi < files.length) { v.src = files[fi]; v.play().catch(() => {}); } }, true);
+    v.src = files[0];
     const still = matchMedia("(prefers-reduced-motion:reduce)").matches;
     const pb = $("#vpause");
     v.addEventListener("playing", () => { pb.hidden = false; });
