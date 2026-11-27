@@ -14,6 +14,11 @@ Sito statico (HTML, CSS, JS senza framework) per Collinelli Auto S.r.l., Bagnaca
 - Auto in vendita: `data/auto.js` (temporaneo, verrà sostituito dal pannello admin)
 - Video hero: mettere il file in `assets/video/hero-drone.mp4` (H.264, 1920x1080, max 8-10 MB, senza audio). Finché manca si vede la foto dell'ultima auto arrivata.
 
+## Messa online sul dominio vero
+In `build.py` impostare `ANTEPRIMA = False` (e `SITO` se il dominio cambia), poi `python3 build.py`:
+toglie il `noindex`, aggiunge i canonical e apre `robots.txt` con la sitemap.
+Finché resta `True` Google non indicizza l'anteprima su GitHub Pages.
+
 ## Prossimo passo: pannello admin
 `db/schema.sql` contiene le tabelle Supabase `auto` e `richieste`. In `assets/app.js` basta sostituire `getCars()` con la lettura dal database; i moduli salveranno le richieste in `richieste` invece di aprire l'app di posta.
 

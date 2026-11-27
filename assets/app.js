@@ -50,6 +50,8 @@ const ICON = {
   shield: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 3 4 6v6c0 4.5 3.4 8.3 8 9 4.6-.7 8-4.5 8-9V6z"/><path d="m8.5 12 2.5 2.5 4.5-5"/></svg>',
   left: '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m15 5-7 7 7 7"/></svg>',
   right: '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m9 5 7 7-7 7"/></svg>',
+  pause: '<svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><rect x="6" y="5" width="4" height="14" rx="1"/><rect x="14" y="5" width="4" height="14" rx="1"/></svg>',
+  play: '<svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>',
   menu: '<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 7h16M4 12h16M4 17h16"/></svg>'
 };
 
@@ -72,9 +74,9 @@ $("#foot").outerHTML = `
 <footer class="foot"><div class="wrap">
   <div class="cols">
     <div class="brand"><img src="assets/img/logo-giallo.png" alt="Collinelli Auto" width="202" height="44" loading="lazy"><p>Collinelli Auto S.r.l.<br>Auto usate selezionate, garantite 12 mesi, e officina per tutte le marche a Bagnacavallo.</p></div>
-    <div><h3>${AZ.showroom.nome}</h3><ul><li>${AZ.showroom.via}, ${AZ.showroom.cap}</li><li><a href="${telHref(AZ.showroom.tel)}">${AZ.showroom.tel}</a></li><li><a href="mailto:${AZ.showroom.mail}">${AZ.showroom.mail}</a></li></ul></div>
-    <div><h3>${AZ.officina.nome}</h3><ul><li>${AZ.officina.via}, ${AZ.officina.cap}</li><li><a href="${telHref(AZ.officina.tel)}">${AZ.officina.tel}</a></li><li><a href="mailto:${AZ.officina.mail}">${AZ.officina.mail}</a></li></ul></div>
-    <div><h3>Pagine</h3><ul>${NAV.map(([h, t]) => `<li><a href="${h}">${t}</a></li>`).join("")}<li><a href="${AZ.facebook}" rel="noopener">Facebook</a></li></ul></div>
+    <div><h2>${AZ.showroom.nome}</h2><ul><li>${AZ.showroom.via}, ${AZ.showroom.cap}</li><li><a href="${telHref(AZ.showroom.tel)}">${AZ.showroom.tel}</a></li><li><a href="mailto:${AZ.showroom.mail}">${AZ.showroom.mail}</a></li></ul></div>
+    <div><h2>${AZ.officina.nome}</h2><ul><li>${AZ.officina.via}, ${AZ.officina.cap}</li><li><a href="${telHref(AZ.officina.tel)}">${AZ.officina.tel}</a></li><li><a href="mailto:${AZ.officina.mail}">${AZ.officina.mail}</a></li></ul></div>
+    <div><h2>Pagine</h2><ul>${NAV.map(([h, t]) => `<li><a href="${h}">${t}</a></li>`).join("")}<li><a href="${AZ.facebook}" rel="noopener">Facebook</a></li></ul></div>
   </div>
   <div class="legal"><span>© ${new Date().getFullYear()} Collinelli Auto S.r.l.</span><a href="privacy.html">Privacy e cookie</a></div>
 </div></footer>
@@ -117,6 +119,15 @@ function marquee(cars) {
     const attrs = hidden ? ' tabindex="-1"' : "";
     return stock.has(b) ? `<a href="auto.html?marca=${encodeURIComponent(b)}"${attrs}>${inner}</a>` : `<div>${inner}</div>`;
   };
+  const btn = $("#mq-btn");
+  if (btn) {
+    btn.innerHTML = ICON.pause;
+    btn.onclick = () => {
+      const p = el.classList.toggle("paused");
+      btn.innerHTML = p ? ICON.play : ICON.pause;
+      btn.setAttribute("aria-label", p ? "Fai scorrere i marchi" : "Ferma lo scorrimento dei marchi");
+    };
+  }
   el.innerHTML = `<div class="track">${MARCHI.map(b => item(b)).join("")}<div class="dup" aria-hidden="true">${MARCHI.map(b => item(b, true)).join("")}</div></div>`;
 }
 
@@ -177,6 +188,13 @@ const RENDER = {
     const v = $("#hero-video");
     v.poster = full(lead.foto[0]);
     const still = matchMedia("(prefers-reduced-motion:reduce)").matches;
+    const pb = $("#vpause");
+    v.addEventListener("playing", () => { pb.hidden = false; });
+    pb.onclick = () => {
+      if (v.paused) { v.play(); pb.innerHTML = ICON.pause; pb.setAttribute("aria-label", "Metti in pausa il video"); }
+      else { v.pause(); pb.innerHTML = ICON.play; pb.setAttribute("aria-label", "Riproduci il video"); }
+    };
+    pb.innerHTML = ICON.pause;
     if (!still) v.play().catch(() => {});
     const opt = (k, t) => `<option value="">${t}</option>` + uniq(cars, k).map(v => `<option>${esc(v)}</option>`).join("");
     $("#s-marca").innerHTML = opt("marca", "Tutte le marche");
@@ -245,7 +263,19 @@ const RENDER = {
       main.innerHTML = `<section class="band"><div class="wrap empty"><h1>Quest'auto non è più disponibile</h1><p class="muted">Potrebbe essere già stata venduta. Guarda le altre auto in vendita.</p><a class="btn acc" href="auto.html">Auto in vendita</a></div></section>`;
       return;
     }
-    document.title = `${title(c)} ${c.versione} – Collinelli Auto`;
+    document.title = `${title(c)} ${c.versione} usata – Collinelli Auto`;
+    const desc = `${title(c)} ${c.versione}, ${c.immatricolazione}, ${num(c.km)} km, ${c.carburante.toLowerCase()}, ${eur(c.prezzo)}${c.iva ? " + IVA" : ""}. Garanzia 12 mesi, Bagnacavallo (RA).`;
+    document.querySelector('meta[name="description"]')?.setAttribute("content", desc);
+    const ld = document.createElement("script");
+    ld.type = "application/ld+json";
+    ld.textContent = JSON.stringify({
+      "@context": "https://schema.org", "@type": "Car", name: `${title(c)} ${c.versione}`, brand: { "@type": "Brand", name: c.marca }, model: c.modello,
+      vehicleConfiguration: c.versione, bodyType: c.carrozzeria, fuelType: c.carburante, vehicleTransmission: c.cambio, color: c.colore || undefined,
+      mileageFromOdometer: { "@type": "QuantitativeValue", value: c.km, unitCode: "KMT" }, dateVehicleFirstRegistered: c.immatricolazione.split("/").reverse().join("-"),
+      itemCondition: "https://schema.org/UsedCondition", image: c.foto.map(full),
+      offers: { "@type": "Offer", price: c.prezzo, priceCurrency: "EUR", availability: "https://schema.org/InStock", seller: { "@type": "AutoDealer", name: "Collinelli Auto S.r.l." } }
+    });
+    document.head.append(ld);
     const rows = [
       ["Immatricolazione", c.immatricolazione], ["Chilometri", num(c.km) + " km"], ["Alimentazione", c.carburante],
       ["Cambio", c.cambio + (c.marce ? `, ${c.marce}` : "")], ["Potenza", `${c.cv} CV (${Math.round(c.cv * 0.7355)} kW)`],
@@ -259,17 +289,13 @@ const RENDER = {
     <div class="wrap">
       <nav class="crumbs" aria-label="Percorso"><a href="auto.html">Auto in vendita</a> / ${esc(c.marca)}</nav>
       <div class="detail">
-        <div>
+        <div class="gal-col">
           <div class="gallery">
             <div class="slides" id="slides">${c.foto.map((p, i) => `<button type="button" data-i="${i}" aria-label="Ingrandisci foto ${i + 1}"><img src="${esc(full(p))}" alt="${esc(name)}, foto ${i + 1}" ${i ? 'loading="lazy"' : 'fetchpriority="high"'}></button>`).join("")}</div>
             <button class="gal-nav prev" id="prev" aria-label="Foto precedente">${ICON.left}</button>
             <button class="gal-nav next" id="next" aria-label="Foto successiva">${ICON.right}</button>
           </div>
           <div class="thumbs" id="thumbs">${c.foto.map((p, i) => `<button type="button" data-i="${i}" aria-label="Foto ${i + 1}"${i ? "" : ' aria-current="true"'}>${imgTag(p, "")}</button>`).join("")}</div>
-          <section style="margin-top:44px"><h2 style="font-size:26px;margin-bottom:14px">Caratteristiche</h2>
-            <table class="sheet"><tbody>${rows.map(([k, v]) => `<tr><td>${k}</td><td>${esc(v)}</td></tr>`).join("")}</tbody></table></section>
-          <section style="margin-top:44px"><h2 style="font-size:26px;margin-bottom:14px">Dotazioni</h2>
-            <ul class="equip">${c.dotazioni.map(d => `<li>${esc(d)}</li>`).join("")}</ul></section>
         </div>
         <aside class="side">
           <div><h1>${esc(title(c))}</h1><p class="ver">${esc(c.versione)}</p></div>
@@ -283,6 +309,12 @@ const RENDER = {
           <div class="guarantee">${ICON.shield}<div><b>Garanzia 12 mesi</b><br><span class="muted">Controllata nella nostra officina prima della vendita, consegnata con attestazione di conformità.</span></div></div>
           <p class="note">${AZ.showroom.via}, Bagnacavallo. Finanziamenti e permuta su richiesta.</p>
         </aside>
+        <div class="info">
+          <section><h2>Caratteristiche</h2>
+            <table class="sheet"><tbody>${rows.map(([k, v]) => `<tr><td>${k}</td><td>${esc(v)}</td></tr>`).join("")}</tbody></table></section>
+          <section><h2>Dotazioni</h2>
+            <ul class="equip">${c.dotazioni.map(d => `<li>${esc(d)}</li>`).join("")}</ul></section>
+        </div>
       </div>
     </div>
     <section class="band sunk"><div class="wrap"><div class="head"><h2>Potrebbero interessarti</h2><a class="more" href="auto.html">Tutte le auto</a></div>
@@ -368,7 +400,12 @@ const RENDER = {
 
 /* blocchi presenti su più pagine */
 const hoursEl = $("#hours"); if (hoursEl) hoursEl.innerHTML = hoursTable();
-const placesEl = $("#home-places"); if (placesEl) placesEl.innerHTML = placeCard(AZ.showroom, `<h3 style="margin-top:8px;font-size:17px">Orari</h3>${hoursTable()}`) + placeCard(AZ.officina);
+const placesEl = $("#home-places");
+if (placesEl) {
+  const st = openStatus(), oggi = AZ.orari[dayIdx()][1];
+  placesEl.innerHTML = placeCard(AZ.showroom, `<p class="status ${st.open ? "on" : "off"}" style="margin:0">${esc(st.text)}</p><p class="muted">Oggi: ${oggi.length ? oggi.map(([a, z]) => `${a}–${z}`).join(", ") : "chiuso"}. <a href="contatti.html">Tutti gli orari</a></p>`) +
+    placeCard(AZ.officina, `<p class="muted">Tagliandi, riparazioni, diagnosi e revisioni per tutte le marche. Per appuntamenti chiama il ${AZ.officina.tel}.</p>`);
+}
 
 (RENDER[page] || (() => {}))();
 }

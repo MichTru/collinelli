@@ -3,16 +3,17 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Collinelli Auto – Auto usate garantite e officina a Bagnacavallo</title>
-<meta name="description" content="Auto usate selezionate, controllate in officina e garantite 12 mesi. Vendita e assistenza a Bagnacavallo (RA) dal 1973.">
+<title>Auto usate garantite a Bagnacavallo | Collinelli Auto</title>
+<meta name="description" content="Auto usate selezionate e garantite 12 mesi, officina per tutte le marche. Collinelli Auto a Bagnacavallo (RA), tra Lugo e Ravenna, dal 1973.">
 <meta name="theme-color" content="#111112">
-<meta property="og:title" content="Collinelli Auto – Auto usate garantite e officina a Bagnacavallo">
-<meta property="og:description" content="Auto usate selezionate, controllate in officina e garantite 12 mesi. Vendita e assistenza a Bagnacavallo (RA) dal 1973.">
+<meta name="robots" content="noindex">
+<meta property="og:title" content="Auto usate garantite a Bagnacavallo | Collinelli Auto">
+<meta property="og:description" content="Auto usate selezionate e garantite 12 mesi, officina per tutte le marche. Collinelli Auto a Bagnacavallo (RA), tra Lugo e Ravenna, dal 1973.">
 <meta property="og:locale" content="it_IT">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Figtree:ital,wght@0,400..900;1,700..900&display=swap">
-<link rel="stylesheet" href="assets/style.css?v=202611271445">
+<link rel="stylesheet" href="assets/style.css?v=202611271505">
 <link rel="icon" href="assets/img/favicon.png" type="image/png">
 <link rel="apple-touch-icon" href="assets/img/apple-touch-icon.png">
 <meta property="og:image" content="assets/img/og.jpg">
@@ -32,6 +33,7 @@
   <video id="hero-video" muted loop playsinline preload="metadata" aria-hidden="true">
     <source src="assets/video/hero-drone.mp4" type="video/mp4">
   </video>
+  <button class="pause" id="vpause" type="button" aria-label="Metti in pausa il video" hidden></button>
   <div class="wrap">
     <h1>Auto usate garantite, dal 1973.</h1>
     <p class="lead">Vendita e officina a Bagnacavallo: ogni auto passa dai nostri meccanici e parte con 12 mesi di garanzia.</p>
@@ -49,7 +51,7 @@
 
 <section class="band yellow" id="chi-siamo"><div class="wrap">
   <div class="split" style="align-items:end;margin-bottom:clamp(32px,4vw,52px)">
-    <p class="big">Una famiglia di meccanici che vende auto.</p>
+    <h2 class="big">Una famiglia di meccanici che vende auto.</h2>
     <div>
       <p style="font-size:18px">Gilberto Collinelli apre l'officina nel 1973 e per quasi trent'anni lavora con Alfa Romeo. Nel 1997 entra il figlio Marco e nasce la vendita di usato in Via Chiusa. Oggi siamo cinque persone, due sedi, e clienti che tornano.</p>
       <p style="margin-top:20px"><a class="btn dark" href="chi-siamo.html">La nostra storia</a></p>
@@ -92,7 +94,7 @@
 </div></section>
 
 <section class="band" id="marchi"><div class="wrap">
-  <div class="head"><h2>I marchi che trattiamo</h2><p class="muted">Usato di tutte le principali case. Se il modello che cerchi non c'è, lo troviamo anche con l'importazione parallela.</p></div>
+  <div class="head mq-head"><h2>I marchi che trattiamo</h2><button class="mq-btn" id="mq-btn" type="button" aria-label="Ferma lo scorrimento dei marchi"></button></div>
 </div>
 <div class="marquee" id="marquee"></div>
 </section>
@@ -104,7 +106,7 @@
 
 </main>
 <div id="foot"></div>
-<script src="data/auto.js?v=202611271445"></script>
-<script src="assets/app.js?v=202611271445"></script>
+<script src="data/auto.js?v=202611271505"></script>
+<script src="assets/app.js?v=202611271505"></script>
 </body>
 </html>

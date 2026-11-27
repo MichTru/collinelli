@@ -9,6 +9,7 @@ HEAD = """<!DOCTYPE html>
 <title>{title}</title>
 <meta name="description" content="{desc}">
 <meta name="theme-color" content="#111112">
+{robots}
 <meta property="og:title" content="{title}">
 <meta property="og:description" content="{desc}">
 <meta property="og:locale" content="it_IT">
@@ -54,13 +55,14 @@ servizi_html = "".join(f"<li><b>{t}</b><span>{d}</span></li>" for t, d in SERVIZ
 
 PAGES = {
 "index": dict(
-    title="Collinelli Auto – Auto usate garantite e officina a Bagnacavallo",
-    desc="Auto usate selezionate, controllate in officina e garantite 12 mesi. Vendita e assistenza a Bagnacavallo (RA) dal 1973.",
+    title="Auto usate garantite a Bagnacavallo | Collinelli Auto",
+    desc="Auto usate selezionate e garantite 12 mesi, officina per tutte le marche. Collinelli Auto a Bagnacavallo (RA), tra Lugo e Ravenna, dal 1973.",
     page="home", extra=LD, body=f"""
 <section class="hero">
   <video id="hero-video" muted loop playsinline preload="metadata" aria-hidden="true">
     <source src="assets/video/hero-drone.mp4" type="video/mp4">
   </video>
+  <button class="pause" id="vpause" type="button" aria-label="Metti in pausa il video" hidden></button>
   <div class="wrap">
     <h1>Auto usate garantite, dal 1973.</h1>
     <p class="lead">Vendita e officina a Bagnacavallo: ogni auto passa dai nostri meccanici e parte con 12 mesi di garanzia.</p>
@@ -78,7 +80,7 @@ PAGES = {
 
 <section class="band yellow" id="chi-siamo"><div class="wrap">
   <div class="split" style="align-items:end;margin-bottom:clamp(32px,4vw,52px)">
-    <p class="big">Una famiglia di meccanici che vende auto.</p>
+    <h2 class="big">Una famiglia di meccanici che vende auto.</h2>
     <div>
       <p style="font-size:18px">Gilberto Collinelli apre l'officina nel 1973 e per quasi trent'anni lavora con Alfa Romeo. Nel 1997 entra il figlio Marco e nasce la vendita di usato in Via Chiusa. Oggi siamo cinque persone, due sedi, e clienti che tornano.</p>
       <p style="margin-top:20px"><a class="btn dark" href="chi-siamo.html">La nostra storia</a></p>
@@ -121,7 +123,7 @@ PAGES = {
 </div></section>
 
 <section class="band" id="marchi"><div class="wrap">
-  <div class="head"><h2>I marchi che trattiamo</h2><p class="muted">Usato di tutte le principali case. Se il modello che cerchi non c'è, lo troviamo anche con l'importazione parallela.</p></div>
+  <div class="head mq-head"><h2>I marchi che trattiamo</h2><button class="mq-btn" id="mq-btn" type="button" aria-label="Ferma lo scorrimento dei marchi"></button></div>
 </div>
 <div class="marquee" id="marquee"></div>
 </section>
@@ -133,7 +135,7 @@ PAGES = {
 """),
 
 "auto": dict(
-    title="Auto usate in vendita – Collinelli Auto Bagnacavallo",
+    title="Auto usate in vendita a Bagnacavallo | Collinelli Auto",
     desc="Tutte le auto usate in vendita da Collinelli Auto: prezzi, chilometri, foto e dotazioni. Garanzia 12 mesi.",
     page="auto", extra="", body="""
 <div class="wrap pagehead"><h1>Auto in vendita</h1><p class="muted">Usato selezionato, controllato nella nostra officina e garantito 12 mesi.</p></div>
@@ -152,11 +154,11 @@ PAGES = {
 """),
 
 "scheda": dict(
-    title="Scheda auto – Collinelli Auto", desc="Foto, caratteristiche, dotazioni e prezzo dell'auto. Garanzia 12 mesi.",
+    title="Auto usata | Collinelli Auto", desc="Foto, caratteristiche, dotazioni e prezzo dell'auto. Garanzia 12 mesi.",
     page="scheda", extra="", body=""),
 
 "officina": dict(
-    title="Officina a Bagnacavallo – Collinelli Auto",
+    title="Officina auto a Bagnacavallo | Collinelli Auto",
     desc="Officina per auto di tutte le marche a Bagnacavallo: tagliandi, diagnosi, climatizzatori, cambi automatici, revisioni, auto sostitutiva.",
     page="officina", extra="", body=f"""
 <div class="wrap pagehead"><h1>Officina per tutte le marche</h1><p class="muted">Dal 1973 ripariamo auto a Bagnacavallo. Meccanica, elettronica e diagnosi con personale che si aggiorna sulle nuove tecnologie.</p></div>
@@ -179,7 +181,7 @@ PAGES = {
 """),
 
 "chi-siamo": dict(
-    title="Chi siamo – Collinelli Auto dal 1973",
+    title="Chi siamo, dal 1973 | Collinelli Auto",
     desc="La storia di Collinelli Auto: officina dal 1973, vendita di usato garantito dal 1997, a Bagnacavallo.",
     page="chi-siamo", extra="", body="""
 <section class="intro"><div class="wrap split" style="align-items:end">
@@ -224,7 +226,7 @@ PAGES = {
 </div></section>
 
 <section class="band"><div class="wrap">
-  <div class="head"><h2>I marchi che trattiamo</h2></div>
+  <div class="head mq-head"><h2>I marchi che trattiamo</h2><button class="mq-btn" id="mq-btn" type="button" aria-label="Ferma lo scorrimento dei marchi"></button></div>
 </div>
 <div class="marquee" id="marquee"></div>
 <div class="wrap" style="margin-top:36px;display:flex;gap:10px;flex-wrap:wrap"><a class="btn acc" href="auto.html">Guarda le auto in vendita</a><a class="btn" href="contatti.html">Passa a trovarci</a></div>
@@ -232,7 +234,7 @@ PAGES = {
 """),
 
 "contatti": dict(
-    title="Contatti e orari – Collinelli Auto Bagnacavallo",
+    title="Contatti e orari | Collinelli Auto Bagnacavallo",
     desc="Showroom in Via Chiusa 53/F e officina in Via Celletta 8/E a Bagnacavallo (RA). Telefono, email, orari e indicazioni.",
     page="contatti", extra=LD, body="""
 <section class="intro"><div class="wrap">
@@ -258,15 +260,22 @@ PAGES = {
 """),
 
 "privacy": dict(
-    title="Privacy e cookie – Collinelli Auto", desc="Informativa privacy e cookie di Collinelli Auto S.r.l.",
+    title="Privacy e cookie | Collinelli Auto", desc="Informativa privacy e cookie di Collinelli Auto S.r.l.",
     page="privacy", extra="", body="""
 <div class="wrap pagehead" style="padding-bottom:80px"><h1>Privacy e cookie</h1>
 <p class="muted">Il testo dell'informativa privacy e cookie va fornito dall'azienda o dal suo consulente prima della pubblicazione del sito.</p></div>
 """),
 }
 
-VERSION = "202611271445"  # cambia a ogni pubblicazione per forzare l'aggiornamento nei browser
+# True finché il sito è un'anteprima (GitHub Pages): evita che Google lo indicizzi come doppione
+ANTEPRIMA = True
+SITO = "https://www.collinelliauto.it/"
+VERSION = "202611271505"  # cambia a ogni pubblicazione per forzare l'aggiornamento nei browser
 for name, p in PAGES.items():
     p.setdefault("v", VERSION)
+    p["robots"] = '<meta name="robots" content="noindex">' if ANTEPRIMA or name == "privacy" else f'<link rel="canonical" href="{SITO}{"" if name == "index" else name + ".html"}">' 
     Path(f"{'index' if name == 'index' else name}.html").write_text(HEAD.format(**p), encoding="utf-8")
+Path("robots.txt").write_text("User-agent: *\n" + ("Disallow: /\n" if ANTEPRIMA else f"Allow: /\nSitemap: {SITO}sitemap.xml\n"), encoding="utf-8")
+urls = [SITO] + [f"{SITO}{n}.html" for n in ("auto", "officina", "chi-siamo", "contatti")]
+Path("sitemap.xml").write_text('<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n' + "".join(f"  <url><loc>{u}</loc></url>\n" for u in urls) + "</urlset>\n", encoding="utf-8")
 print("ok", len(PAGES))
