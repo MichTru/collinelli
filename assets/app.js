@@ -204,7 +204,6 @@ const RENDER = {
     const recent = cars.slice().sort((a, b) => b.inserita.localeCompare(a.inserita));
     const lead = recent.find(c => c.evidenza) || recent[0];
     const v = $("#hero-video");
-    v.poster = "assets/img/sede-showroom.jpg";
     // su telefono in verticale prova prima la versione verticale del video
     const files = ["assets/video/hero-drone.mp4"];
     if (matchMedia("(max-width:700px) and (orientation:portrait)").matches) files.unshift("assets/video/hero-drone-verticale.mp4");
@@ -213,7 +212,7 @@ const RENDER = {
     v.src = files[0];
     const still = matchMedia("(prefers-reduced-motion:reduce)").matches;
     const pb = $("#vpause");
-    v.addEventListener("playing", () => { pb.hidden = false; });
+    v.addEventListener("playing", () => { pb.hidden = false; v.classList.add("on"); });
     pb.onclick = () => {
       if (v.paused) { v.play(); pb.innerHTML = ICON.pause; pb.setAttribute("aria-label", "Metti in pausa il video"); }
       else { v.pause(); pb.innerHTML = ICON.play; pb.setAttribute("aria-label", "Riproduci il video"); }

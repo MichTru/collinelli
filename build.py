@@ -67,6 +67,7 @@ PAGES = {
     desc="Auto usate selezionate e garantite 12 mesi, officina per tutte le marche. Collinelli Auto a Bagnacavallo (RA), tra Lugo e Ravenna, dal 1973.",
     page="home", extra=LD, body=f"""
 <section class="hero">
+  <img class="hero-img" src="assets/img/sede-showroom.jpg" alt="Lo showroom Collinelli Auto a Bagnacavallo" width="1672" height="941" fetchpriority="high">
   <video id="hero-video" muted loop playsinline preload="metadata" aria-hidden="true"></video>
   <button class="pause" id="vpause" type="button" aria-label="Metti in pausa il video" hidden></button>
   <div class="wrap">
@@ -286,7 +287,7 @@ PAGES = {
 ANTEPRIMA = True
 SITO = "https://www.collinelliauto.it/"
 ANTEPRIMA_URL = "https://michtru.github.io/collinelli/"
-VERSION = "202611271556"  # cambia a ogni pubblicazione per forzare l'aggiornamento nei browser
+VERSION = "202611271602"  # cambia a ogni pubblicazione per forzare l'aggiornamento nei browser
 for name, p in PAGES.items():
     p.setdefault("v", VERSION)
     p["preload"] = '<link rel="preload" as="image" href="assets/img/sede-showroom.jpg">\n' if name == "index" else ""
