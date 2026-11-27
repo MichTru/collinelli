@@ -15,7 +15,7 @@ HEAD = """<!DOCTYPE html>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,100..900&display=swap">
-<link rel="stylesheet" href="assets/style.css">
+<link rel="stylesheet" href="assets/style.css?v={v}">
 <link rel="icon" href="assets/img/favicon.png" type="image/png">
 <link rel="apple-touch-icon" href="assets/img/apple-touch-icon.png">
 <meta property="og:image" content="assets/img/og.jpg">
@@ -27,8 +27,8 @@ HEAD = """<!DOCTYPE html>
 {body}
 </main>
 <div id="foot"></div>
-<script src="data/auto.js"></script>
-<script src="assets/app.js"></script>
+<script src="data/auto.js?v={v}"></script>
+<script src="assets/app.js?v={v}"></script>
 </body>
 </html>
 """
@@ -230,6 +230,8 @@ PAGES = {
 """),
 }
 
+VERSION = "202611271415"  # cambia a ogni pubblicazione per forzare l'aggiornamento nei browser
 for name, p in PAGES.items():
+    p.setdefault("v", VERSION)
     Path(f"{'index' if name == 'index' else name}.html").write_text(HEAD.format(**p), encoding="utf-8")
 print("ok", len(PAGES))
