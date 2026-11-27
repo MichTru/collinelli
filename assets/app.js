@@ -62,6 +62,8 @@ if (document.documentElement.classList.contains("intro")) {
   ov.addEventListener("animationend", e => { if (e.animationName === "c-zoom") end(); });
   addEventListener("keydown", end, { once: true });
   ov.addEventListener("click", end);
+  // a scrittura finita la maschera non serve più: senza, lo zoom costa pochissimo
+  setTimeout(() => ov.querySelector(".c-shape")?.removeAttribute("mask"), 1900);
   setTimeout(end, 3483);
 }
 

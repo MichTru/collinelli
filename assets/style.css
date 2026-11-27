@@ -380,13 +380,14 @@ body[data-page=home] .hero .wrap{padding-block:0 clamp(40px,8vh,88px)}
    la C del monogramma si scrive a mano tratto dopo tratto, poi la camera "vola" dentro l'occhiello basso della C e si apre il sito */
 .intro-ov{display:none}
 html.intro body{overflow:hidden}
-html.intro .intro-ov{display:grid;place-items:center;position:fixed;inset:0;z-index:300;background:#111112;cursor:pointer;animation:ov-clear .75s cubic-bezier(.6,0,.2,1) 2163ms forwards}
-.intro-c{width:clamp(170px,30vw,330px);height:auto;overflow:visible;transform-origin:53.6% 70.4%;animation:c-zoom 1s cubic-bezier(.8,0,.15,1) 1983ms forwards}
-.intro-c path{fill:none;stroke:#fff;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:var(--l);stroke-dashoffset:var(--l);animation:c-draw var(--t) var(--e) var(--d) forwards}
+html.intro .intro-ov{display:grid;place-items:center;position:fixed;inset:0;z-index:300;cursor:pointer;contain:strict}
+.intro-bg{position:absolute;inset:0;background:#111112;will-change:opacity;animation:ov-clear .75s cubic-bezier(.6,0,.2,1) 2163ms forwards}
+.intro-c{position:relative;width:clamp(170px,30vw,330px);height:auto;overflow:visible;transform-origin:53.6% 70.4%;will-change:transform,opacity;animation:c-zoom 1s cubic-bezier(.8,0,.15,1) 1983ms forwards}
+.intro-c mask path{fill:none;stroke:#fff;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:var(--l);stroke-dashoffset:var(--l);animation:c-draw var(--t) var(--e) var(--d) forwards}
 html.intro .hero video{animation:settle 1.6s cubic-bezier(.2,.7,.2,1) 2233ms both}
 @keyframes c-draw{to{stroke-dashoffset:0}}
 @keyframes c-zoom{60%{opacity:1}to{transform:scale(22);opacity:0}}
-@keyframes ov-clear{to{background-color:rgb(17 17 18 / 0)}}
+@keyframes ov-clear{to{opacity:0}}
 .hero video{object-position:62% 50%}
 @media(max-width:700px) and (orientation:portrait){.hero video{object-position:54% 50%}}
 .photo-band{margin:8px clamp(6px,1.4vw,20px);border-radius:var(--r-l);overflow:hidden;aspect-ratio:21/8;background:var(--raised)}
