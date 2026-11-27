@@ -285,7 +285,7 @@ const RENDER = {
       main.innerHTML = `<section class="band"><div class="wrap empty"><h1>Quest'auto non è più disponibile</h1><p class="muted">Potrebbe essere già stata venduta. Guarda le altre auto in vendita.</p><a class="btn acc" href="auto.html">Auto in vendita</a></div></section>`;
       return;
     }
-    document.title = `${title(c)} ${c.versione} usata – Collinelli Auto`;
+    document.title = `${title(c)} usata ${year(c)}, ${num(c.km)} km | Collinelli Auto`;
     const desc = `${title(c)} ${c.versione}, ${c.immatricolazione}, ${num(c.km)} km, ${c.carburante.toLowerCase()}, ${eur(c.prezzo)}${c.iva ? " + IVA" : ""}. Garanzia 12 mesi, Bagnacavallo (RA).`;
     document.querySelector('meta[name="description"]')?.setAttribute("content", desc);
     const ld = document.createElement("script");

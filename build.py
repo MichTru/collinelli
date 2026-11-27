@@ -1,5 +1,6 @@
 """Genera le pagine HTML del sito Collinelli Auto da un'unica testata comune."""
 from pathlib import Path
+import re
 
 HEAD = """<!DOCTYPE html>
 <html lang="it">
@@ -283,7 +284,7 @@ PAGES = {
 ANTEPRIMA = True
 SITO = "https://www.collinelliauto.it/"
 ANTEPRIMA_URL = "https://michtru.github.io/collinelli/"
-VERSION = "202611271536"  # cambia a ogni pubblicazione per forzare l'aggiornamento nei browser
+VERSION = "202611271540"  # cambia a ogni pubblicazione per forzare l'aggiornamento nei browser
 for name, p in PAGES.items():
     p.setdefault("v", VERSION)
     p["base"] = ANTEPRIMA_URL if ANTEPRIMA else SITO
@@ -292,6 +293,7 @@ for name, p in PAGES.items():
     p["robots"] = '<meta name="robots" content="noindex">' if ANTEPRIMA or name == "privacy" else f'<link rel="canonical" href="{SITO}{"" if name == "index" else name + ".html"}">' 
     Path(f"{'index' if name == 'index' else name}.html").write_text(HEAD.format(**p), encoding="utf-8")
 Path("robots.txt").write_text("User-agent: *\n" + ("Disallow: /\n" if ANTEPRIMA else f"Allow: /\nSitemap: {SITO}sitemap.xml\n"), encoding="utf-8")
-urls = [SITO] + [f"{SITO}{n}.html" for n in ("auto", "officina", "chi-siamo", "contatti")]
+ids = re.findall(r'id: "([^"]+)"', Path("data/auto.js").read_text(encoding="utf-8"))
+urls = [SITO] + [f"{SITO}{n}.html" for n in ("auto", "officina", "chi-siamo", "contatti")] + [f"{SITO}scheda.html?id={i}" for i in ids]
 Path("sitemap.xml").write_text('<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n' + "".join(f"  <url><loc>{u}</loc></url>\n" for u in urls) + "</urlset>\n", encoding="utf-8")
 print("ok", len(PAGES))
