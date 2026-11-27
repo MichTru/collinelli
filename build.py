@@ -14,7 +14,7 @@ HEAD = """<!DOCTYPE html>
 <meta property="og:locale" content="it_IT">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,100..900&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Figtree:ital,wght@0,400..900;1,700..900&display=swap">
 <link rel="stylesheet" href="assets/style.css?v={v}">
 <link rel="icon" href="assets/img/favicon.png" type="image/png">
 <link rel="apple-touch-icon" href="assets/img/apple-touch-icon.png">
@@ -192,11 +192,11 @@ PAGES = {
 </div></section>
 <section class="band yellow"><div class="wrap split">
   <h2 style="font-size:clamp(30px,4vw,48px)">Come lavoriamo</h2>
-  <ul class="list" style="border-color:var(--on-acc)">
-    <li style="border-color:var(--on-acc)"><b>Rapporto diretto</b><span>Parli con chi ha controllato l'auto, non con un call center.</span></li>
-    <li style="border-color:var(--on-acc)"><b>Trasparenza</b><span>Prezzi chiari e storia del veicolo spiegata prima della firma.</span></li>
-    <li style="border-color:var(--on-acc)"><b>Dopo la vendita</b><span>L'assistenza continua nella nostra officina, a pochi minuti dallo showroom.</span></li>
-    <li style="border-color:var(--on-acc)"><b>Auto su richiesta</b><span>Con l'importazione parallela troviamo anche il modello che non abbiamo in piazzale.</span></li>
+  <ul class="list">
+    <li><b>Rapporto diretto</b><span>Parli con chi ha controllato l'auto, non con un call center.</span></li>
+    <li><b>Trasparenza</b><span>Prezzi chiari e storia del veicolo spiegata prima della firma.</span></li>
+    <li><b>Dopo la vendita</b><span>L'assistenza continua nella nostra officina, a pochi minuti dallo showroom.</span></li>
+    <li><b>Auto su richiesta</b><span>Con l'importazione parallela troviamo anche il modello che non abbiamo in piazzale.</span></li>
   </ul>
 </div></section>
 <section class="band"><div class="wrap">
@@ -230,7 +230,7 @@ PAGES = {
 """),
 }
 
-VERSION = "202611271415"  # cambia a ogni pubblicazione per forzare l'aggiornamento nei browser
+VERSION = "202611271430"  # cambia a ogni pubblicazione per forzare l'aggiornamento nei browser
 for name, p in PAGES.items():
     p.setdefault("v", VERSION)
     Path(f"{'index' if name == 'index' else name}.html").write_text(HEAD.format(**p), encoding="utf-8")
