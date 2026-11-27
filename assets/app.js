@@ -42,7 +42,7 @@ const NAV = [["auto.html", "Auto in vendita", "auto"], ["officina.html", "Offici
 $("#top").outerHTML = `
 <a class="skip" href="#main">Vai al contenuto</a>
 <header class="top"><div class="wrap">
-  <a class="logo" href="index.html" aria-label="Collinelli Auto, home"><i aria-hidden="true">C</i><div><b>Collinelli Auto</b><span>Bagnacavallo, dal 1973</span></div></a>
+  <a class="logo" href="index.html"><img src="assets/img/logo-giallo.png" alt="Collinelli Auto" width="211" height="46"></a>
   <nav class="nav" id="nav" aria-label="Menu principale">
     ${NAV.map(([h, t, k]) => `<a href="${h}"${(page === k || (page === "scheda" && k === "auto")) ? ' aria-current="page"' : ""}>${t}</a>`).join("")}
   </nav>
@@ -53,7 +53,7 @@ $("#top").outerHTML = `
 $("#foot").outerHTML = `
 <footer class="foot"><div class="wrap">
   <div class="cols">
-    <div><h3>Collinelli Auto S.r.l.</h3><p>Auto usate selezionate, garantite 12 mesi, e officina per tutte le marche a Bagnacavallo.</p></div>
+    <div class="brand"><img src="assets/img/logo-giallo.png" alt="Collinelli Auto" width="202" height="44" loading="lazy"><p>Collinelli Auto S.r.l.<br>Auto usate selezionate, garantite 12 mesi, e officina per tutte le marche a Bagnacavallo.</p></div>
     <div><h3>${AZ.showroom.nome}</h3><ul><li>${AZ.showroom.via}, ${AZ.showroom.cap}</li><li><a href="${telHref(AZ.showroom.tel)}">${AZ.showroom.tel}</a></li><li><a href="mailto:${AZ.showroom.mail}">${AZ.showroom.mail}</a></li></ul></div>
     <div><h3>${AZ.officina.nome}</h3><ul><li>${AZ.officina.via}, ${AZ.officina.cap}</li><li><a href="${telHref(AZ.officina.tel)}">${AZ.officina.tel}</a></li><li><a href="mailto:${AZ.officina.mail}">${AZ.officina.mail}</a></li></ul></div>
     <div><h3>Pagine</h3><ul>${NAV.map(([h, t]) => `<li><a href="${h}">${t}</a></li>`).join("")}<li><a href="${AZ.facebook}" rel="noopener">Facebook</a></li></ul></div>

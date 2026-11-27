@@ -18,7 +18,7 @@ Sito statico (HTML, CSS, JS senza framework) per Collinelli Auto S.r.l., Bagnaca
 `db/schema.sql` contiene le tabelle Supabase `auto` e `richieste`. In `assets/app.js` basta sostituire `getCars()` con la lettura dal database; i moduli salveranno le richieste in `richieste` invece di aprire l'app di posta.
 
 ## Da avere dall'azienda prima di andare online
-- Logo vettoriale e video col drone
+- Logo vettoriale (SVG) e video col drone: per ora il logo è PNG, ricavato dai file in `brand/`
 - Partita IVA e dati societari per il piè di pagina
 - Testo privacy e cookie
 - Orari dell'officina (quelli in pagina sono dello showroom, da AutoScout24)

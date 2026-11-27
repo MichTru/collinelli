@@ -2,13 +2,13 @@
 VOICE   sobria, da officina di famiglia che vende auto scelte: poche parole, fatti, prezzi chiari
 IDEA    lo showroom di sera: auto illuminate sul nero, il giallo dell'insegna Collinelli come segnale
 PICTURE la foto vera dell'ultima auto arrivata, a tutto schermo, con la ricerca appoggiata sopra
-COLOUR  nero #111112 dominante, bianco caldo #f2f1ec per il testo, giallo #ffc400 per azioni e una fascia piena
-TYPE    Archivo: larghezza 125 per titoli e prezzi (come i badge sui portelloni), 100 per il testo
+COLOUR  nero #111112 dominante, bianco caldo #f2f1ec per il testo, giallo insegna #f2c215 per azioni e una fascia piena
+TYPE    logo corsivo originale; Archivo: larghezza 125 per titoli e prezzi (come i badge sui portelloni), 100 per il testo
 */
 :root{
   color-scheme:dark;
   --bg:#111112;--raised:#1c1c1e;--sunk:#0b0b0c;--line:#2f2f32;
-  --ink:#f2f1ec;--muted:#a6a59f;--acc:#ffc400;--acc-hi:#ffd23f;--on-acc:#111112;
+  --ink:#f2f1ec;--muted:#a6a59f;--acc:#f2c215;--acc-hi:#f7d348;--on-acc:#111112;
   --wide:"Archivo",system-ui,sans-serif;
   --r:10px;--max:1240px;
 }
@@ -40,7 +40,9 @@ p{margin:0}
 /* testata */
 .top{position:sticky;top:0;z-index:40;background:rgb(17 17 18 / .92);backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
 .top .wrap{display:flex;align-items:center;gap:20px;min-height:70px}
-.logo{display:flex;align-items:center;gap:12px;text-decoration:none;line-height:1}
+.logo{display:flex;align-items:center;text-decoration:none;line-height:1}
+.logo img{height:46px;width:auto}
+@media(max-width:520px){.logo img{height:32px}}
 .logo i{flex:none;display:grid;place-items:center;width:40px;height:40px;border-radius:9px;background:var(--acc);color:var(--on-acc);font-style:normal;font-variation-settings:"wdth" 125;font-weight:850;font-size:22px}
 .logo div{display:flex;flex-direction:column}
 .logo b{font-variation-settings:"wdth" 125;font-weight:800;font-size:21px;letter-spacing:-.01em}
@@ -200,6 +202,7 @@ dialog::backdrop{background:rgb(10 10 11 / .82)}
 .foot{background:var(--sunk);border-top:1px solid var(--line);padding-block:48px 28px;font-size:15px;color:var(--muted)}
 .foot .cols{display:grid;grid-template-columns:1.2fr 1fr 1fr 1fr;gap:28px}
 .foot h3{color:var(--ink);font-size:16px;margin-bottom:10px}
+.foot .brand img{height:44px;width:auto;margin-bottom:14px}
 .foot a{color:var(--muted)}
 .foot ul{list-style:none;padding:0;margin:0;display:grid;gap:8px}
 .foot .legal{margin-top:36px;padding-top:20px;border-top:1px solid var(--line);font-size:13.5px;display:flex;gap:16px;flex-wrap:wrap;justify-content:space-between}
