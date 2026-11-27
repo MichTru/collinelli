@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Auto usate in vendita – Collinelli Auto Bagnacavallo</title>
+<meta name="description" content="Tutte le auto usate in vendita da Collinelli Auto: prezzi, chilometri, foto e dotazioni. Garanzia 12 mesi.">
+<meta name="theme-color" content="#111112">
+<meta property="og:title" content="Auto usate in vendita – Collinelli Auto Bagnacavallo">
+<meta property="og:description" content="Tutte le auto usate in vendita da Collinelli Auto: prezzi, chilometri, foto e dotazioni. Garanzia 12 mesi.">
+<meta property="og:locale" content="it_IT">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,100..900&display=swap">
+<link rel="stylesheet" href="assets/style.css">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 40 40'%3E%3Crect width='40' height='40' rx='9' fill='%23ffc400'/%3E%3Ctext x='20' y='29' font-family='Arial' font-weight='900' font-size='26' text-anchor='middle' fill='%23111112'%3EC%3C/text%3E%3C/svg%3E">
+
+</head>
+<body data-page="auto">
+<div id="top"></div>
+<main id="main">
+
+<div class="wrap pagehead"><h1>Auto in vendita</h1><p class="muted">Usato selezionato, controllato nella nostra officina e garantito 12 mesi.</p></div>
+<div class="wrap catalog" style="padding-bottom:70px">
+  <form class="filters" id="filters" aria-label="Filtri"></form>
+  <div>
+    <div class="bar">
+      <button class="btn openf" type="button" id="openf">Filtra</button>
+      <label class="f" style="margin-left:auto"><span class="skip">Ordina per</span><select id="sort">
+        <option value="recenti">Ultimi arrivi</option><option value="prezzo-su">Prezzo più basso</option><option value="prezzo-giu">Prezzo più alto</option><option value="km">Meno chilometri</option><option value="anno">Più recenti</option></select></label>
+    </div>
+    <p class="npinfo" id="npinfo" hidden>Per tre anni dalla patente B puoi guidare auto fino a 105 kW di potenza e con un rapporto potenza/tara fino a 75 kW/t. Su ogni auto segnata controlliamo i due valori sul libretto.</p>
+    <div class="cars" id="list" aria-live="polite"></div>
+  </div>
+</div>
+
+</main>
+<div id="foot"></div>
+<script src="data/auto.js"></script>
+<script src="assets/app.js"></script>
+</body>
+</html>
