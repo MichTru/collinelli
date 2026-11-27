@@ -356,7 +356,6 @@ const RENDER = {
         <label class="f">Lavoro da fare<select name="servizio"><option>Tagliando</option><option>Riparazione</option><option>Diagnosi elettronica</option><option>Climatizzatore</option><option>Cambio automatico</option><option>Revisione</option><option>Altro</option></select></label>
         <label class="f">Giorno preferito<input name="giorno" type="date"></label>`
     });
-    $("#place-officina").innerHTML = placeCard(AZ.officina);
   },
 
   async "chi-siamo"() {

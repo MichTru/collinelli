@@ -161,26 +161,38 @@ PAGES = {
     title="Officina auto a Bagnacavallo | Collinelli Auto",
     desc="Officina per auto di tutte le marche a Bagnacavallo: tagliandi, diagnosi, climatizzatori, cambi automatici, revisioni, auto sostitutiva.",
     page="officina", extra="", body=f"""
-<section class="intro"><div class="wrap"><div class="svc-head" style="margin:0">
-  <div><h1>Officina per tutte le marche</h1><p class="muted">Dal 1973 ripariamo auto a Bagnacavallo, in Via Celletta 8/E. Meccanica, elettronica e diagnosi con personale che si aggiorna sulle nuove tecnologie.</p></div>
-  <div class="acts"><a class="btn acc" href="tel:+39054562254">Chiama 0545 62254</a></div>
-</div></div></section>
+<section class="intro"><div class="wrap off-top">
+  <div>
+    <h1>Officina per tutte le marche</h1>
+    <p class="lead-text" style="margin-top:14px">Dal 1973 ripariamo auto a Bagnacavallo. Preventivo chiaro prima di iniziare, lavori spesso pronti in giornata.</p>
+    <div class="acts" style="margin-top:22px"><a class="btn acc" href="#prenota">Prenota un intervento</a><a class="btn" href="tel:+39054562254">Chiama 0545 62254</a></div>
+  </div>
+  <aside class="off-card">
+    <h2>Officina e assistenza</h2>
+    <address>Via Celletta 8/E<br>48012 Bagnacavallo (RA)</address>
+    <p><a href="tel:+39054562254">0545 62254</a><br><a href="mailto:assistenza@collinelliauto.com">assistenza@collinelliauto.com</a></p>
+    <a class="more" href="https://www.google.com/maps/search/?api=1&query=Via+Celletta+8+Bagnacavallo" rel="noopener">Indicazioni stradali</a>
+  </aside>
+</div></section>
 
-<section class="band" style="padding-top:8px"><div class="wrap">
-  <ul class="svc">{servizi_html}<li class="cta"><a href="#prenota"><b>Prenota un intervento</b><span>Scegli il lavoro e il giorno, ti richiamiamo per confermare.</span></a></li></ul>
-  <div class="promises" style="margin-top:14px">
+<section class="band"><div class="wrap">
+  <h2 style="margin-bottom:18px">Cosa facciamo</h2>
+  <ul class="svc-list">{servizi_html}</ul>
+</div></section>
+
+<section class="band sunk"><div class="wrap">
+  <h2 style="margin-bottom:18px">Perché portarla da noi</h2>
+  <div class="why">
     <div><h3>Prezzi concordati prima</h3><p class="muted">Ti diamo il preventivo e lavoriamo solo dopo il tuo ok.</p></div>
-    <div><h3>Spesso pronta in giornata</h3><p class="muted">Le manutenzioni ordinarie si chiudono quasi sempre in giornata.</p></div>
-    <div><h3>Sconto per chi ha comprato da noi</h3><p class="muted">Se la tua auto viene dal nostro showroom, la manutenzione costa meno.</p></div>
+    <div><h3>Spesso pronta in giornata</h3><p class="muted">Le manutenzioni ordinarie si chiudono quasi sempre in giornata, con auto sostitutiva se serve.</p></div>
+    <div><h3>Sconto se l'hai comprata da noi</h3><p class="muted">Per le auto vendute dal nostro showroom la manutenzione costa meno.</p></div>
   </div>
 </div></section>
 
-<section class="band sunk" id="prenota"><div class="wrap split">
-  <div style="display:grid;gap:18px;align-content:start">
-    <div><h2>Prenota un intervento</h2><p class="muted" style="margin-top:10px">Lasciaci auto, lavoro e giorno che preferisci: ti richiamiamo per confermare l'appuntamento.</p></div>
-    <div id="place-officina"></div>
-  </div>
-  <div id="form-officina"></div>
+<section class="band" id="prenota"><div class="wrap">
+  <h2>Prenota un intervento</h2>
+  <p class="muted" style="margin:10px 0 20px;max-width:60ch">Lasciaci auto, lavoro e giorno che preferisci: ti richiamiamo per confermare l'appuntamento.</p>
+  <div id="form-officina" class="form-card"></div>
 </div></section>
 """),
 
@@ -274,7 +286,7 @@ PAGES = {
 # True finché il sito è un'anteprima (GitHub Pages): evita che Google lo indicizzi come doppione
 ANTEPRIMA = True
 SITO = "https://www.collinelliauto.it/"
-VERSION = "202611271506"  # cambia a ogni pubblicazione per forzare l'aggiornamento nei browser
+VERSION = "202611271508"  # cambia a ogni pubblicazione per forzare l'aggiornamento nei browser
 for name, p in PAGES.items():
     p.setdefault("v", VERSION)
     p["robots"] = '<meta name="robots" content="noindex">' if ANTEPRIMA or name == "privacy" else f'<link rel="canonical" href="{SITO}{"" if name == "index" else name + ".html"}">' 

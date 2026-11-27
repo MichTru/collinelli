@@ -348,3 +348,21 @@ dialog::backdrop{background:rgb(10 10 11 / .82)}
   #form-officina .modal-form,#form-contatti .modal-form{grid-template-columns:1fr 1fr;column-gap:14px}
   #form-officina .modal-form>:is(fieldset,.err,.sent,button,label:has(textarea)),#form-contatti .modal-form>:is(fieldset,.err,.sent,button,label:has(textarea)){grid-column:1/-1}
 }
+/* officina */
+.off-top{display:grid;grid-template-columns:minmax(0,1.5fr) minmax(0,1fr);gap:24px clamp(24px,4vw,56px);align-items:end}
+.off-top .acts{display:flex;gap:10px;flex-wrap:wrap}
+.off-card{background:var(--raised);border-radius:var(--r);padding:22px 24px;display:grid;gap:10px;align-content:start}
+.off-card h2{font-size:19px}
+.off-card address{font-style:normal}
+.off-card p a{color:var(--ink)}
+@media(max-width:860px){.off-top{grid-template-columns:1fr}}
+.svc-list{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:22px 48px}
+.svc-list li{display:grid;gap:3px;padding-left:24px;position:relative;align-content:start}
+.svc-list li::before{content:"";position:absolute;left:0;top:8px;width:10px;height:10px;border-radius:50%;background:var(--acc)}
+.svc-list li b{font-weight:600;font-size:17px}
+.svc-list li span{color:var(--muted)}
+@media(max-width:700px){.svc-list{grid-template-columns:1fr;gap:16px}}
+.why{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:20px 40px}
+.why h3{margin-bottom:6px}
+@media(max-width:760px){.why{grid-template-columns:1fr}}
+.form-card{max-width:none}
