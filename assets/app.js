@@ -12,7 +12,7 @@ const AZ = {
     ["Venerdì", [["9:00", "12:30"], ["15:00", "19:00"]]], ["Sabato", [["9:00", "12:30"], ["15:00", "18:00"]]], ["Domenica", []]
   ]
 };
-const MARCHI = ["Alfa Romeo", "Audi", "BMW", "DR", "Fiat", "Ford", "Kia", "Lancia", "Mercedes-Benz", "Mini", "Opel", "Peugeot", "Renault", "Volkswagen"];
+const MARCHI = ["Alfa Romeo", "Audi", "BMW", "DR", "Fiat", "Ford", "Kia", "Lancia", "Mercedes-Benz", "Mini", "Nissan", "Opel", "Peugeot", "Renault", "Toyota", "Volkswagen"];
 const slug = s => s.toLowerCase().normalize("NFD").replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, "");
 const mins = t => { const [h, m] = t.split(":"); return h * 60 + +m; };
 const dayIdx = () => (new Date().getDay() + 6) % 7;
@@ -110,12 +110,21 @@ const hoursTable = () => {
   return `<table class="hours"><tbody>${AZ.orari.map(([g, f], i) => `<tr${i === d ? ' class="today"' : ""}><td>${g}${i === d ? " <span>oggi</span>" : ""}</td><td>${f.length ? f.map(([a, z]) => `${a}–${z}`).join(", ") : "Chiuso"}</td></tr>`).join("")}</tbody></table>`;
 };
 
-/* nastro dei marchi: logo in assets/img/marchi/<nome>.svg, se manca si vede il nome */
+/* nastro dei marchi: logo in assets/img/marchi/<nome>.png, se manca si vede il nome */
+// dimensiona ogni logo sulla stessa area visiva, così una scritta lunga e un tondo pesano uguale
+window.fitLogo = i => {
+  const r = i.naturalWidth / i.naturalHeight;
+  let h = Math.sqrt(5000 / r), w = h * r;
+  if (w > 168) { w = 168; h = w / r; }
+  if (h > 62) { h = 62; w = h * r; }
+  i.style.width = Math.round(w) + "px"; i.style.height = Math.round(h) + "px";
+  i.classList.add("ok"); i.nextElementSibling?.remove();
+};
 function marquee(cars) {
   const el = $("#marquee"); if (!el) return;
   const stock = new Set(cars.map(c => c.marca));
   const item = (b, hidden) => {
-    const inner = `<img src="assets/img/marchi/${slug(b)}.svg" alt="" onload="this.classList.add('ok');this.nextElementSibling.remove()"><span>${esc(b)}</span>`;
+    const inner = `<img src="assets/img/marchi/${slug(b)}.png" alt="${hidden ? "" : esc(b)}" onload="fitLogo(this)"><span>${esc(b)}</span>`;
     const attrs = hidden ? ' tabindex="-1"' : "";
     return stock.has(b) ? `<a href="auto.html?marca=${encodeURIComponent(b)}"${attrs}>${inner}</a>` : `<div>${inner}</div>`;
   };

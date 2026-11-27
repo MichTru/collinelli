@@ -270,7 +270,7 @@ PAGES = {
 # True finché il sito è un'anteprima (GitHub Pages): evita che Google lo indicizzi come doppione
 ANTEPRIMA = True
 SITO = "https://www.collinelliauto.it/"
-VERSION = "202611271505"  # cambia a ogni pubblicazione per forzare l'aggiornamento nei browser
+VERSION = "202611271450"  # cambia a ogni pubblicazione per forzare l'aggiornamento nei browser
 for name, p in PAGES.items():
     p.setdefault("v", VERSION)
     p["robots"] = '<meta name="robots" content="noindex">' if ANTEPRIMA or name == "privacy" else f'<link rel="canonical" href="{SITO}{"" if name == "index" else name + ".html"}">' 

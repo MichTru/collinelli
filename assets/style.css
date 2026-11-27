@@ -279,9 +279,9 @@ dialog::backdrop{background:rgb(10 10 11 / .82)}
 .marquee .track{animation:slide 42s linear infinite}
 .marquee:hover .track,.marquee:focus-within .track{animation-play-state:paused}
 .marquee .dup{padding-left:14px}
-.marquee a,.marquee .track>div:not(.dup),.marquee .dup>div{flex:none;display:grid;place-items:center;width:200px;height:110px;border-radius:var(--r);background:var(--raised);text-decoration:none;transition:background .2s}
+.marquee a,.marquee .track>div:not(.dup),.marquee .dup>div{flex:none;display:grid;place-items:center;width:210px;height:104px;border-radius:var(--r);background:var(--raised);text-decoration:none;transition:background .2s}
 .marquee a:hover{background:var(--line)}
-.marquee img{display:none;max-width:120px;max-height:54px;width:auto;height:auto;filter:brightness(0) invert(1);opacity:.85}
+.marquee img{display:none;opacity:.9}
 .marquee img.ok{display:block}
 .marquee span{font-weight:700;font-size:20px;letter-spacing:-.01em;color:var(--ink)}
 .band.sunk .marquee a,.band.sunk .marquee div{background:var(--bg)}
