@@ -17,12 +17,14 @@ HEAD = """<!DOCTYPE html>
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Figtree:ital,wght@0,400..900;1,700..900&display=swap">
 <link rel="stylesheet" href="assets/style.css?v={v}">
+<script>try{{if(!sessionStorage.getItem("intro")&&!matchMedia("(prefers-reduced-motion:reduce)").matches)document.documentElement.classList.add("intro")}}catch(e){{}}</script>
 <link rel="icon" href="assets/img/favicon.png" type="image/png">
 <link rel="apple-touch-icon" href="assets/img/apple-touch-icon.png">
 <meta property="og:image" content="assets/img/og.jpg">
 {extra}
 </head>
 <body data-page="{page}">
+<div class="intro-ov" aria-hidden="true"><img src="assets/img/logo-giallo.png" alt=""></div>
 <div id="top"></div>
 <main id="main">
 {body}
@@ -275,7 +277,7 @@ PAGES = {
 # True finché il sito è un'anteprima (GitHub Pages): evita che Google lo indicizzi come doppione
 ANTEPRIMA = True
 SITO = "https://www.collinelliauto.it/"
-VERSION = "202611271518"  # cambia a ogni pubblicazione per forzare l'aggiornamento nei browser
+VERSION = "202611271522"  # cambia a ogni pubblicazione per forzare l'aggiornamento nei browser
 for name, p in PAGES.items():
     p.setdefault("v", VERSION)
     p["robots"] = '<meta name="robots" content="noindex">' if ANTEPRIMA or name == "privacy" else f'<link rel="canonical" href="{SITO}{"" if name == "index" else name + ".html"}">' 

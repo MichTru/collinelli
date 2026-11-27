@@ -55,6 +55,15 @@ const ICON = {
   menu: '<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 7h16M4 12h16M4 17h16"/></svg>'
 };
 
+/* ---------- intro ---------- */
+if (document.documentElement.classList.contains("intro")) {
+  const end = () => { document.documentElement.classList.remove("intro"); try { sessionStorage.setItem("intro", "1"); } catch (e) {} };
+  const ov = document.querySelector(".intro-ov");
+  ov.addEventListener("animationend", e => { if (e.animationName === "ov-out") end(); });
+  ov.addEventListener("click", end);
+  setTimeout(end, 3000);
+}
+
 /* ---------- testata e piede comuni ---------- */
 const page = document.body.dataset.page;
 const NAV = [["auto.html", "Auto in vendita", "auto"], ["officina.html", "Officina", "officina"], ["chi-siamo.html", "Chi siamo", "chi-siamo"], ["contatti.html", "Contatti", "contatti"]];
