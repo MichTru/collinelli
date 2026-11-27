@@ -336,10 +336,15 @@ dialog::backdrop{background:rgb(10 10 11 / .82)}
 .svc-head p{margin-top:10px}
 .svc-head .acts{display:flex;gap:10px;flex-wrap:wrap}
 .svc{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:10px}
-.svc li{background:var(--bg);border-radius:var(--r-s);padding:16px 18px;display:grid;gap:4px;align-content:start}
+.svc li{background:var(--raised);border-radius:var(--r-s);padding:16px 18px;display:grid;gap:4px;align-content:start}
 .svc li b{font-weight:600}
 .svc li span{color:var(--muted);font-size:15px;line-height:1.45}
 .svc li.cta{padding:0;background:var(--acc);color:var(--on-acc)}
 .svc li.cta a{display:grid;gap:4px;padding:16px 18px;height:100%;text-decoration:none;border-radius:inherit}
 .svc li.cta span{color:#2b2617}
 .svc li.cta:hover{background:var(--acc-hi)}
+.band.sunk .svc li:not(.cta){background:var(--bg)}
+@media(min-width:700px){
+  #form-officina .modal-form,#form-contatti .modal-form{grid-template-columns:1fr 1fr;column-gap:14px}
+  #form-officina .modal-form>:is(fieldset,.err,.sent,button,label:has(textarea)),#form-contatti .modal-form>:is(fieldset,.err,.sent,button,label:has(textarea)){grid-column:1/-1}
+}

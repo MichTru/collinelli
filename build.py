@@ -161,21 +161,25 @@ PAGES = {
     title="Officina auto a Bagnacavallo | Collinelli Auto",
     desc="Officina per auto di tutte le marche a Bagnacavallo: tagliandi, diagnosi, climatizzatori, cambi automatici, revisioni, auto sostitutiva.",
     page="officina", extra="", body=f"""
-<div class="wrap pagehead"><h1>Officina per tutte le marche</h1><p class="muted">Dal 1973 ripariamo auto a Bagnacavallo. Meccanica, elettronica e diagnosi con personale che si aggiorna sulle nuove tecnologie.</p></div>
-<section class="band"><div class="wrap split">
-  <div>
-    <h2 style="font-size:28px;margin-bottom:18px">Cosa facciamo</h2>
-    <ul class="list">{servizi_html}</ul>
-  </div>
-  <div style="display:grid;gap:22px">
-    <div class="guarantee"><div><b>Prezzi concordati prima</b><br><span class="muted">Ti diamo il preventivo e lavoriamo solo dopo il tuo ok.</span></div></div>
-    <div class="guarantee"><div><b>Spesso pronta in giornata</b><br><span class="muted">Le manutenzioni ordinarie si chiudono quasi sempre in giornata.</span></div></div>
-    <div class="guarantee"><div><b>Sconto per chi ha comprato da noi</b><br><span class="muted">Se la tua auto viene dal nostro showroom, la manutenzione costa meno.</span></div></div>
-    <div id="place-officina"></div>
+<section class="intro"><div class="wrap"><div class="svc-head" style="margin:0">
+  <div><h1>Officina per tutte le marche</h1><p class="muted">Dal 1973 ripariamo auto a Bagnacavallo, in Via Celletta 8/E. Meccanica, elettronica e diagnosi con personale che si aggiorna sulle nuove tecnologie.</p></div>
+  <div class="acts"><a class="btn acc" href="tel:+39054562254">Chiama 0545 62254</a></div>
+</div></div></section>
+
+<section class="band" style="padding-top:8px"><div class="wrap">
+  <ul class="svc">{servizi_html}<li class="cta"><a href="#prenota"><b>Prenota un intervento</b><span>Scegli il lavoro e il giorno, ti richiamiamo per confermare.</span></a></li></ul>
+  <div class="promises" style="margin-top:14px">
+    <div><h3>Prezzi concordati prima</h3><p class="muted">Ti diamo il preventivo e lavoriamo solo dopo il tuo ok.</p></div>
+    <div><h3>Spesso pronta in giornata</h3><p class="muted">Le manutenzioni ordinarie si chiudono quasi sempre in giornata.</p></div>
+    <div><h3>Sconto per chi ha comprato da noi</h3><p class="muted">Se la tua auto viene dal nostro showroom, la manutenzione costa meno.</p></div>
   </div>
 </div></section>
+
 <section class="band sunk" id="prenota"><div class="wrap split">
-  <div><h2>Prenota un intervento</h2><p class="muted" style="margin-top:14px">Lasciaci auto, lavoro e giorno che preferisci: ti richiamiamo per confermare l'appuntamento.</p></div>
+  <div style="display:grid;gap:18px;align-content:start">
+    <div><h2>Prenota un intervento</h2><p class="muted" style="margin-top:10px">Lasciaci auto, lavoro e giorno che preferisci: ti richiamiamo per confermare l'appuntamento.</p></div>
+    <div id="place-officina"></div>
+  </div>
   <div id="form-officina"></div>
 </div></section>
 """),
@@ -270,7 +274,7 @@ PAGES = {
 # True finché il sito è un'anteprima (GitHub Pages): evita che Google lo indicizzi come doppione
 ANTEPRIMA = True
 SITO = "https://www.collinelliauto.it/"
-VERSION = "202611271458"  # cambia a ogni pubblicazione per forzare l'aggiornamento nei browser
+VERSION = "202611271506"  # cambia a ogni pubblicazione per forzare l'aggiornamento nei browser
 for name, p in PAGES.items():
     p.setdefault("v", VERSION)
     p["robots"] = '<meta name="robots" content="noindex">' if ANTEPRIMA or name == "privacy" else f'<link rel="canonical" href="{SITO}{"" if name == "index" else name + ".html"}">' 
