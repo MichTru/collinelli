@@ -366,3 +366,4 @@ dialog::backdrop{background:rgb(10 10 11 / .82)}
 .why h3{margin-bottom:6px}
 @media(max-width:760px){.why{grid-template-columns:1fr}}
 .form-card{max-width:none}
+@media(max-width:960px){.side{position:static}}
